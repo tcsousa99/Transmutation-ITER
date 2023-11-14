@@ -21,3 +21,28 @@ Some important concepts that this code misses are:
 - There's no dynamic calculations, this is, accounting for the new nuclei as they are formed.
 
 These first three parameters can overstimate the number of reactions. In general, the probability of the reaction (cross-section) is quite low, but multiplied by the high flux, it reaches significant values. The same neutron can only have one reaction (of the ones considered, since scattering is not included). Therefore, generally, this code overestimates the total transmutation rate that includes isotopes but is quite good for the estimation of the transmutation rate that changes the atomic number. The last parameter is harder to account for.
+
+
+## Differential equation approach
+
+One can calculate the rate the number of produced is
+
+$\dfrac{dN_i(t)}{dt} = -(\lambda_i + \sigma_i \Phi)N_i(t) + \sum_j (\lambda_{ij} + \sigma_{ij} \Phi)N_i(t)$
+
+$N_i(t)$ - Number of nuclei at time $t$
+
+$\lambda_i$ - Decay rate of nuclide i.
+
+$\sigma_i$ - Total cross-section of nuclear reaction for nuclide i.
+
+$\lambda_{ij}$ - Decay rate from nuclide j to  i.
+
+$\sigma_{ij}$ - Cross-section of nuclear reaction from nuclide j to i.
+
+$\lambda = \dfrac{ln2}{t_{1/2}}$
+
+
+
+## What to change:
+
+- This code is calculating the transmutation of rhodium wrongly. Use rhodium as a reference and also check other values for 
